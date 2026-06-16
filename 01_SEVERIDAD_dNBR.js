@@ -198,4 +198,73 @@ Export.image.toAsset({
 });
 
  
+
+//////////////////////LEYENDA MAPA SEVERIDAD///////////////////////////////  
+
+
+var colors =["#7a8737","#acbe4d","#0ae042", "#fff70b","#ffaf38","#ff641b","#a41fd6"]; 
+
+              
+
+var names = ['Enhanced Regrowth, high (post-fire)', 'Enhanced Regrowth, low (post-fire)', 
+'Unburned','Low Severity','Moderate-low Severity', 'Moderate-high Severity', 'High Severity'];
+
+
+
+var legend = ui.Panel({
+  style: {
+    position: 'bottom-right',
+    padding: '8px 15px'
+  }
+});
+
+// Create and add the legend title.
+var legendTitle = ui.Label({
+  value: 'Leyenda',
+  style: {
+    fontWeight: 'bold',
+    fontSize: '16px',
+    margin: '0 0 4px 0',
+    padding: '0'
+  }
+});
+
+legend.add(legendTitle);
+
+// var loading = ui.Label('Legend:', {margin: '2px 0 4px 0'});
+// legend.add(loading);
+
+var makeRow = function(color, name) {
+  // Create the label that is actually the colored box.
+  var colorBox = ui.Label({
+    style: {
+      backgroundColor: color,
+      // Use padding to give the box height and width.
+      padding: '8px',
+      margin: '0 0 4px 0'
+    }
+  });
+
+  // Create the label filled with the description text.
+  var description = ui.Label({
+    value: name,
+    style: {margin: '0 0 4px 6px'}
+  });
+
+  return ui.Panel({
+    widgets: [colorBox, description],
+    layout: ui.Panel.Layout.Flow('horizontal')
+  });
+};
+
+for (var i = 0; i < names.length; i++){
+legend.add(makeRow(colors[i], names[i]));
+}
+
+Map.add(legend)
+
+
+
+
+
  
