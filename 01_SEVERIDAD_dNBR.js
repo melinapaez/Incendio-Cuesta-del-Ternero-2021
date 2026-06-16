@@ -162,5 +162,40 @@ var areaFuego = ee.Image.pixelArea().multiply(0.0001).addBands(NBRcat)
 print('Área afectada por el fuego (ha)', areaFuego)
  
  
+// ============================================================
+// 10. EXPORTO IMAGENES AL ASSET Y DRIVE
+// ============================================================
 
+Export.image.toDrive({
+  image: NBRcat,
+  description: 'dNBR_categorizado',
+ // assetId: 'projects/ee-mbpaez/assets/dNBR',
+  region: AOI.geometry(),
+  scale: 20,
+  maxPixels: 1e9
+}); 
+
+
+Export.image.toAsset({
+  image: dNBR,
+  description: 'dNBR_2021',
+  assetId: 'projects/ee-melinapaez/assets/indices_CT/dNBR_2021',
+  region: AOI.geometry(),
+  crs: 'EPSG:32719',
+  scale: 20,
+  maxPixels: 1e13
+});
+
+
+Export.image.toAsset({
+  image: NBR_pos,
+  description: 'NBR_pos_2021',
+  assetId: 'projects/ee-melinapaez/assets/indices_CT/NBR_pos_2021',
+  region: AOI.geometry(),
+  crs: 'EPSG:32719',
+  scale: 20,
+  maxPixels: 1e13
+});
+
+ 
  
